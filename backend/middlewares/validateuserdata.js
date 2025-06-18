@@ -6,7 +6,7 @@ const validateUserData = (req, res, next) => {
     let { name, location, phone } = req.body;
 
     // Check empty fields
-    if (!name || !location || !phone) {
+    if (!name.trim() || !location.trim() || !phone.trim()) {
         return res.status(400).json({ message: 'Please fill all fields' });
     }
 

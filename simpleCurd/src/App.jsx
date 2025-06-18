@@ -8,6 +8,7 @@ import {
   getUserList,
   updateUserById,
 } from "./services/userService";
+import Toast, { notifySuccess } from "./components/Toast";
 
 function App() {
   const initialValue = {
@@ -47,9 +48,10 @@ function App() {
   const addUser = (e) => {
     e.preventDefault();
     createUser(user)
-      .then(() => {
+      .then((res) => {
         setLoader(true);
         loadUsers();
+        notifySuccess(res.data.message);
         setUser(initialValue);
       })
       .catch((err) => {
@@ -59,7 +61,8 @@ function App() {
   };
 
   const deleteUser = (id) => {
-    deleteUserById(id).then(() => {
+    deleteUserById(id).then((res) => {
+      notifySuccess(res.data.message);
       setLoader(true);
       loadUsers();
     });
@@ -72,9 +75,10 @@ function App() {
   const updateUser = (e) => {
     e.preventDefault();
     updateUserById(user._id, user)
-      .then(() => {
+      .then((res) => {
         setLoader(true);
         loadUsers();
+        notifySuccess(res.data.message);
         setUser(initialValue);
         setIsEditing(false);
       })
@@ -86,6 +90,7 @@ function App() {
 
   return (
     <>
+      <Toast />
       <Form
         user={user}
         error={error}
