@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8000/user";
+const API_URL = import.meta.env.VITE_APP_API_URL + '/user';
 
 export function getUserList() {
     return axios.get(`${API_URL}`);

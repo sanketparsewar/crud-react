@@ -6,8 +6,8 @@ const userRouter = require('./routers/user.routes')
 const app = express()
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+
 mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log('Database connected')
 }).catch((err) => console.log(err))
